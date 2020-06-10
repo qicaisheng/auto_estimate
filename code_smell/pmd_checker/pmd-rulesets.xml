@@ -13,6 +13,8 @@
     <!-- Your rules will come here -->
     <rule ref="category/java/bestpractices.xml" >
         <exclude name="SystemPrintln"/>
+        <exclude name="JUnitTestContainsTooManyAsserts"/>
+        <exclude name="JUnitAssertionsShouldIncludeMessage"/>
     </rule>
     <rule ref="category/java/design.xml" >
         <exclude name="UseUtilityClass"/>
@@ -51,6 +53,13 @@
     <rule ref="category/java/design.xml/DataClass">
         <properties>
             <property name="violationSuppressXPath" value="//ClassOrInterfaceDeclaration['.*Dto|DTO|Request|Response']"/>
+        </properties>
+    </rule>
+
+    <rule ref="category/java/codestyle.xml/MethodNamingConventions">
+        <properties>
+            <property name="junit4TestPattern" value="[a-z][a-zA-Z0-9_]*" />
+            <property name="junit5TestPattern" value="[a-z][a-zA-Z0-9_]*" />
         </properties>
     </rule>
 </ruleset>
