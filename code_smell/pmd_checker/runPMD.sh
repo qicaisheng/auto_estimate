@@ -8,7 +8,7 @@ PMD_RESULT_REPORT_HTML_NAME="pmd-result-report.html"
 declare currentWorkspacePath
 
 function readCurrentWorkspacePath {
-    currentWorkspacePath=$(cat $DATA_DIRECTORY/currentWorkspacePath.txt)
+    currentWorkspacePath=$(cat ${DATA_DIRECTORY}/currentWorkspacePath.txt)
 }
 
 function executePMD {
