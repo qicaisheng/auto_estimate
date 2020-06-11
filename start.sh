@@ -1,19 +1,17 @@
 #!/bin/bash
 
-declare currentWorkspacePath
-
-function prepare_workspace {
+function prepareWorkspace {
     sh prepare_workspace.sh
 }
 
-function calculate_code_smell_score {
+function calculateCodeSmellScore {
     cd code_smell
     sh start.sh
 }
 
 function main {
-    prepare_workspace
-    calculate_code_smell_score
+    prepareWorkspace
+    calculateCodeSmellScore
 }
 
 main
