@@ -39,7 +39,7 @@ function gitClone {
     mkdir ${currentWorkspace}
    
     cd ${currentWorkspace}
-    git clone ${gitRepositoryURL}
+    git clone ${gitRepositoryURL} code
 
     currentWorkspacePath=$PWD
 
