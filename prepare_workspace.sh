@@ -30,16 +30,16 @@ function readGitRepositoryURLFromInput {
 }
 
 function gitClone {
-    cd $WORK_SPACE_DIRECTORY
+    cd ${WORK_SPACE_DIRECTORY}
    
     local currentWorkspace=${gitRepositoryURL#*//*/}
     currentWorkspace=${currentWorkspace////_}
    
-    rm -rf $currentWorkspace
-    mkdir $currentWorkspace
+    rm -rf ${currentWorkspace}
+    mkdir ${currentWorkspace}
    
-    cd $currentWorkspace
-    git clone $gitRepositoryURL
+    cd ${currentWorkspace}
+    git clone ${gitRepositoryURL}
 
     currentWorkspacePath=$PWD
 
@@ -47,7 +47,7 @@ function gitClone {
 }
 
 function writeCurrentWorkspacePathToData {
-    echo $currentWorkspacePath > $DATA_DIRECTORY/currentWorkspacePath.txt
+    echo ${currentWorkspacePath} > ${DATA_DIRECTORY}/currentWorkspacePath.txt
 }
 
 
