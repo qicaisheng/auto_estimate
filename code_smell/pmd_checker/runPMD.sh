@@ -2,8 +2,10 @@
 
 PMD_BIN_FOLDER_NAME="pmd-bin-6.24.0"
 PMD_RULESETS_NAME="pmd-rulesets.xml"
+DATA_DIRECTORY='../../data'
 declare codeRepositoryFolderPath
 declare pmdResultReport="./pmd-result-report.json"
+
 
 function readCodeRepositoryFolderPathFromInput {
 	echo "请输入需要检查的代码绝对路径，例如：/path/code/example/src"
@@ -19,12 +21,18 @@ function readCodeRepositoryFolderPathFromInput {
 	echo "需要检查的代码绝对路径：${codeRepositoryFolderPath}"
 }
 
+function readCurrentWorkspacePath {
+    codeRepositoryFolderPath=$(cat $DATA_DIRECTORY/currentWorkspacePath.txt)
+    echo "current workspace path is: $currentWorkspacePath"
+}
+
 function executePMD {
     ./${PMD_BIN_FOLDER_NAME}/bin/run.sh pmd -d ${codeRepositoryFolderPath} -f json -R ./${PMD_RULESETS_NAME} -r ${pmdResultReport}
 }
 
 function main {
-    readCodeRepositoryFolderPathFromInput
+    # readCodeRepositoryFolderPathFromInput
+	readCurrentWorkspacePath
     executePMD
 }
 
