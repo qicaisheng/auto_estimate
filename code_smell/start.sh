@@ -1,20 +1,20 @@
 #!/bin/bash
 
-function check_pmd {
+function checkPmd {
 	cd pmd_checker
 	sh runPMD.sh
 	cd ..
 }
 
-function calcuate_score {
+function calculateScore {
 	cd score_calculator/src
 	python score_calculator.py
 	cd ../..
 }
 
 function main {
-    check_pmd
-    calcuate_score
+    checkPmd
+    calculateScore
 }
 
 main
