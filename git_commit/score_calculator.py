@@ -1,5 +1,9 @@
+import json
+
 GIT_COMMIT_REPORT_NAME = 'git-commit-report.txt'
 CURRENT_WORKSPACE_DATA = '../data/currentWorkspacePath.txt'
+CURRENT_QUESTION_NAME = '../data/currentQuestionName.txt'
+CONFIG_FILE = '../config.json'
 FULL_SCORE = 10
 SCORE_OF_COMMIT_COUNT = 7
 SCORE_OF_COMMIT_MESSAGE = 3
@@ -9,13 +13,30 @@ commit_count_base_line = 10
 
 def get_current_workspace_path():
     with open(CURRENT_WORKSPACE_DATA) as text_file:
-        return text_file.read()
+        return text_file.read().strip()
 
 
 def get_git_commit_report():
-    git_commit_report_path = get_current_workspace_path().strip() + "/git_commit/" + GIT_COMMIT_REPORT_NAME
+    git_commit_report_path = get_current_workspace_path() + "/git_commit/" + GIT_COMMIT_REPORT_NAME
     with open(git_commit_report_path) as text_file:
         return text_file.read()
+
+
+def get_config():
+    with open(CONFIG_FILE) as json_file:
+        return json.load(json_file)
+
+
+def get_current_question_name():
+    with open(CURRENT_QUESTION_NAME) as text_file:
+        return text_file.read().strip()
+
+
+def set_commit_count_base_line():
+    global commit_count_base_line
+    config = get_config()
+    current_question_name = get_current_question_name()
+    commit_count_base_line = config[current_question_name]["gitCommit"]
 
 
 def calculate_score_of_commit_count(commit_count):
@@ -37,6 +58,7 @@ def calculate_score_of_commit_message(commits):
 
 
 def calculate_score():
+    set_commit_count_base_line()
     commits = get_git_commit_report().splitlines()
     score_of_commit_count = calculate_score_of_commit_count(len(commits))
     score_of_commit_message = calculate_score_of_commit_message(commits)
