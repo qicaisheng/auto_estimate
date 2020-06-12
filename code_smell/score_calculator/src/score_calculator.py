@@ -49,7 +49,7 @@ def get_class_count_from_code():
 
 
 def get_pmd_report():
-    pmd_report_path = get_current_workspace_path() + "/" + PMD_REPORT_NAME
+    pmd_report_path = get_current_workspace_path() + "/pmd/" + PMD_REPORT_NAME
     with open(pmd_report_path) as json_file:
         return json.load(json_file)
 
