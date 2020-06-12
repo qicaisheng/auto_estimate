@@ -1,6 +1,7 @@
 {
   "guessNumber": {
-    "gitCommit": 10
+    "gitCommit": 10,
+    "classCount": 1
   },
   "fizzBuzz": {
     "gitCommit": 6
