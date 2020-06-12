@@ -58,19 +58,22 @@ def get_current_workspace_path():
         return text_file.read().strip()
 
 
-def calculate_score():
-    score = FULL_SCORE
+def deduct_score_for_pmd():
+    deduct_marks = 0
     data = get_pmd_report()
     for checked_file in data['files']:
         for violation in checked_file['violations']:
-            deduct_marks = PRIORITY_DEDUCT_MARKS[violation['priority']]
-            score = score - deduct_marks
+            deduct_marks += PRIORITY_DEDUCT_MARKS[violation['priority']]
+    return deduct_marks
+
+
+def calculate_score():
+    score = FULL_SCORE - deduct_score_for_pmd() - deduct_score_of_class_count()
     return score if score > 0 else 0
 
 
 def main():
     print('code smell score is: {}'.format(calculate_score()))
-    print('class deduct score is: {}'.format(deduct_score_of_class_count()))
 
 
 if __name__ == "__main__":
