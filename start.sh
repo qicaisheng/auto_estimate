@@ -1,7 +1,11 @@
 #!/bin/bash
 
-function prepareWorkspace {
-    sh prepare_workspace.sh
+function prepare {
+    sh prepare.sh
+}
+
+function gitClone {
+    sh git_clone.sh
 }
 
 function detectQuestionName {
@@ -27,8 +31,9 @@ function calculateGitCommitScore {
 }
 
 function main {
-    prepareWorkspace
+    prepare
     detectQuestionName
+    gitClone
     calculateCodeSmellScore
     calculateTestCoverageScore
     calculateGitCommitScore
