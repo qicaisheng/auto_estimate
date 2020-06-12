@@ -4,6 +4,7 @@ GIT_COMMIT_REPORT_NAME = 'git-commit-report.txt'
 CURRENT_WORKSPACE_DATA = '../data/currentWorkspacePath.txt'
 CURRENT_QUESTION_NAME = '../data/currentQuestionName.txt'
 CONFIG_FILE = '../config.json'
+SCORE_REPORT_NAME = 'score.txt'
 FULL_SCORE = 10
 SCORE_OF_COMMIT_COUNT = 7
 SCORE_OF_COMMIT_MESSAGE = 3
@@ -65,7 +66,15 @@ def calculate_score():
     return score_of_commit_count + score_of_commit_message
 
 
+def save_score():
+    score_path = get_current_workspace_path() + "/" + SCORE_REPORT_NAME
+    f = open(score_path, "a")
+    f.write("Git Commit Score: " + str(calculate_score()) + "\n")
+    f.close()
+
+
 def main():
+    save_score()
     print('git commit score is: {}'.format(calculate_score()))
 
 
