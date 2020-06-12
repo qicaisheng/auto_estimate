@@ -20,11 +20,18 @@ function calculateTestCoverageScore {
     cd ..
 }
 
+function calculateGitCommitScore {
+    cd git_commit
+    sh start.sh
+    cd ..
+}
+
 function main {
     prepareWorkspace
     detectQuestionName
     calculateCodeSmellScore
     calculateTestCoverageScore
+    calculateGitCommitScore
 }
 
 main
