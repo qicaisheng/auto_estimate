@@ -1,4 +1,5 @@
 import json
+import os
 
 PMD_REPORT_NAME = 'pmd-result-report.json'
 CURRENT_WORKSPACE_DATA = '../../../data/currentWorkspacePath.txt'
@@ -30,18 +31,31 @@ def set_class_count_base_line():
 
 def deduct_score_of_class_count():
     set_class_count_base_line()
-    return class_count_base_line
+    class_count = get_class_count_from_code()
+    if class_count < class_count_base_line:
+        return SCORE_OF_CLASS_COUNT
+    return 0
+
+
+def get_class_count_from_code():
+    class_count = 0
+    src_main_path = get_current_workspace_path() + "/code/src/main"
+    for (root, dirs, files) in os.walk(src_main_path):
+        for file in files:
+            if file.endswith(".java"):
+                class_count = class_count + 1
+    return class_count
 
 
 def get_pmd_report():
-    pmd_report_path = get_current_workspace_path().strip() + "/" + PMD_REPORT_NAME
+    pmd_report_path = get_current_workspace_path() + "/" + PMD_REPORT_NAME
     with open(pmd_report_path) as json_file:
         return json.load(json_file)
 
 
 def get_current_workspace_path():
     with open(CURRENT_WORKSPACE_DATA) as text_file:
-        return text_file.read()
+        return text_file.read().strip()
 
 
 def calculate_score():
