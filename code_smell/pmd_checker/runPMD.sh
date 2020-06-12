@@ -12,8 +12,8 @@ function readCurrentWorkspacePath {
 }
 
 function executePMD {
-    ./${PMD_BIN_FOLDER_NAME}/bin/run.sh pmd -d ${currentWorkspacePath} -f json -R ./${PMD_RULESETS_NAME} -r ${currentWorkspacePath}/${PMD_RESULT_REPORT_JSON_NAME}
-    ./${PMD_BIN_FOLDER_NAME}/bin/run.sh pmd -d ${currentWorkspacePath} -f html -R ./${PMD_RULESETS_NAME} -r ${currentWorkspacePath}/${PMD_RESULT_REPORT_HTML_NAME}
+    ./${PMD_BIN_FOLDER_NAME}/bin/run.sh pmd -d ${currentWorkspacePath}/code/src/main -f json -R ./${PMD_RULESETS_NAME} -r ${currentWorkspacePath}/${PMD_RESULT_REPORT_JSON_NAME}
+    ./${PMD_BIN_FOLDER_NAME}/bin/run.sh pmd -d ${currentWorkspacePath}/code/src/main -f html -R ./${PMD_RULESETS_NAME} -r ${currentWorkspacePath}/${PMD_RESULT_REPORT_HTML_NAME}
 
 	echo "PMD report is: ${currentWorkspacePath}/${PMD_RESULT_REPORT_HTML_NAME}"
 }
