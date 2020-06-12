@@ -42,7 +42,7 @@ def set_commit_count_base_line():
 def calculate_score_of_commit_count(commit_count):
     if commit_count > commit_count_base_line:
         return SCORE_OF_COMMIT_COUNT
-    return (commit_count / commit_count_base_line) * SCORE_OF_COMMIT_COUNT
+    return (float(commit_count) / float(commit_count_base_line)) * SCORE_OF_COMMIT_COUNT
 
 
 def calculate_score_of_commit_message(commits):
@@ -52,7 +52,7 @@ def calculate_score_of_commit_message(commits):
         commit_message_start_index = commit.index(" ") + 1
         commit_message = commit[commit_message_start_index:]
         if len(commit_message) < COMMIT_MESSAGE_LENGTH_BASE_LINE:
-            deduct_marks += 0.5 * (commit_count_base_line / commit_count)
+            deduct_marks += 0.5 * (float(commit_count_base_line) / float(commit_count))
     score = SCORE_OF_COMMIT_MESSAGE - deduct_marks
     return score if score > 0 else 0
 
