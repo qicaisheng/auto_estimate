@@ -7,6 +7,7 @@ FULL_SCORE = 20
 PRIORITY_DEDUCT_MARKS = {1: 3, 2: 2, 3: 0.5, 4: 0.2, 5: 0.1}
 CURRENT_QUESTION_NAME = '../../../data/currentQuestionName.txt'
 CONFIG_FILE = '../../../config.json'
+SCORE_REPORT_NAME = 'score.txt'
 
 SCORE_OF_CLASS_COUNT = 3
 class_count_base_line = 3
@@ -72,7 +73,15 @@ def calculate_score():
     return score if score > 0 else 0
 
 
+def save_score():
+    score_path = get_current_workspace_path() + "/" + SCORE_REPORT_NAME
+    f = open(score_path, "a")
+    f.write("Code Smell Score: " + str(calculate_score()) + "\n")
+    f.close()
+
+
 def main():
+    save_score()
     print('code smell score is: {}'.format(calculate_score()))
 
 
